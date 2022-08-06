@@ -59,8 +59,8 @@ export const StyledTextInput = styled.TextInput`
   padding-left: 55px;
   border-radius: 5px;
   font-size:16px;
-  height: 60px;
-  margin-bottom: 10px;
+  height: 40px;
+  margin-bottom: 5px;
   color: ${tertiary};
 `;
 
@@ -73,14 +73,14 @@ export const StyledTextInputLabel = styled.Text`
 
 export const LeftIcon = styled.View`
   left: 15px;
-  top: 53px;
+  top: 47px;
   position: absolute;
   z-index: 1;
 `;
 
 export const RightIcon = styled.TouchableOpacity`
   right: 15px;
-  top: 53px;
+  top: 47px;
   position: absolute;
   z-index: 1;
 `;

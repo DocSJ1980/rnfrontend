@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { StatusBar } from 'expo-status-bar';
-import { TextInput, View, Text, Linking, Platform } from 'react-native'
+import { View } from 'react-native'
 
 
 import {
@@ -19,30 +19,11 @@ import {
     ButtonText,
     Line,
     MsgBox,
-    ExtraView,
-    ExtraText,
-    TextLink,
-    TextLinkContent,
-    SmallButtonText,
-    StyledButtonSmall
 } from "./../components/styles.js"
 
 import { Formik } from "formik";
 import { Octicons } from '@expo/vector-icons'
-const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
-const dialCall = () => {
-
-    let phoneNumber = '';
-
-    if (Platform.OS === 'android') {
-        phoneNumber = 'tel:${1234567890}';
-    }
-    else {
-        phoneNumber = 'telprompt:${1234567890}';
-    }
-
-    Linking.openURL(phoneNumber);
-};
+const { darkLight, brand } = Colors;
 
 const Login = () => {
     const [hidePassword, setHidePassword] = useState(true);
@@ -87,12 +68,7 @@ const Login = () => {
                                 <ButtonText>Login</ButtonText>
                             </StyledButton>
                             <Line />
-                            <ExtraView>
-                                <ExtraText>Don't have an account?</ExtraText>
-                                <StyledButtonSmall onPress={dialCall}>
-                                    <SmallButtonText>Call Control Room</SmallButtonText>
-                                </StyledButtonSmall>
-                            </ExtraView>
+
                         </StyledFormArea>
                     )}
                 </Formik>

@@ -19,6 +19,10 @@ import {
     ButtonText,
     Line,
     MsgBox,
+    ExtraView,
+    ExtraText,
+    StyledButtonSmall,
+    SmallButtonText
 } from "./../components/styles.js"
 
 import { Formik } from "formik";
@@ -26,7 +30,7 @@ import { Octicons } from '@expo/vector-icons'
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper.js";
 const { darkLight, brand } = Colors;
 
-const Login = () => {
+const Login = ({ navigation }) => {
     const [hidePassword, setHidePassword] = useState(true);
     return (
         <KeyboardAvoidingWrapper>
@@ -40,6 +44,7 @@ const Login = () => {
                         initialValues={{ email: '', password: '' }}
                         onSubmit={(values) => {
                             console.log(values);
+                            navigation.navigate("Welcome")
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -70,7 +75,12 @@ const Login = () => {
                                     <ButtonText>Login</ButtonText>
                                 </StyledButton>
                                 <Line />
-
+                                <ExtraView>
+                                    <ExtraText>Don't have an account?</ExtraText>
+                                    <StyledButtonSmall onPress={() => { navigation.navigate('Signup') }}>
+                                        <SmallButtonText>Signup</SmallButtonText>
+                                    </StyledButtonSmall>
+                                </ExtraView>
                             </StyledFormArea>
                         )}
                     </Formik>
@@ -85,7 +95,7 @@ const MyTextInput = ({ label, icon, hidePassword, setHidePassword, isPassword, .
     return (
         <View>
             <LeftIcon>
-                <Octicons name={icon} size={30} color={brand} />
+                <Octicons name={icon} size={23} color={brand} />
             </LeftIcon>
             <StyledTextInputLabel>{label}</StyledTextInputLabel>
             <StyledTextInput {...props} />
@@ -95,7 +105,7 @@ const MyTextInput = ({ label, icon, hidePassword, setHidePassword, isPassword, .
                         setHidePassword(!hidePassword);
                     }}
                 >
-                    <Octicons name={hidePassword ? 'eye-closed' : 'eye'} size={30} color={darkLight} />
+                    <Octicons name={hidePassword ? 'eye-closed' : 'eye'} size={23} color={darkLight} />
                 </RightIcon>
             )}
         </View>

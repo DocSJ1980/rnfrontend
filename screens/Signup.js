@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import { StatusBar } from 'expo-status-bar';
-import { TextInput, View, Text, Linking, Platform, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 
 
 import {
     StyledContainer,
     InnerContainer,
-    PageLogo,
     PageTitle,
     SubTitle,
     StyledFormArea,
@@ -21,8 +20,6 @@ import {
     MsgBox,
     ExtraView,
     ExtraText,
-    TextLink,
-    TextLinkContent,
     SmallButtonText,
     StyledButtonSmall
 } from "./../components/styles.js"
@@ -30,12 +27,12 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Formik } from "formik";
 import { Octicons } from '@expo/vector-icons'
-const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
+const { darkLight, brand } = Colors;
 
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper.js";
 
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
     const [hidePassword, setHidePassword] = useState(true);
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date(2000, 0, 1));
@@ -78,6 +75,7 @@ const Signup = () => {
                         initialValues={{ fullName: '', dateOfBirth: '', email: '', password: '', confirmPassword: '' }}
                         onSubmit={(values) => {
                             console.log(values);
+                            navigation.navigate("Welcome")
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -142,7 +140,7 @@ const Signup = () => {
                                 <Line />
                                 <ExtraView>
                                     <ExtraText>Already have an account?</ExtraText>
-                                    <StyledButtonSmall>
+                                    <StyledButtonSmall onPress={() => { navigation.navigate('Login') }}>
                                         <SmallButtonText>Login</SmallButtonText>
                                     </StyledButtonSmall>
                                 </ExtraView>

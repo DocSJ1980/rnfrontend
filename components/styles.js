@@ -20,7 +20,7 @@ const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
-  padding-top: ${StatusBarHeight + 10}px;
+  padding-top: ${StatusBarHeight + 30}px;
   background-color: ${Colors.primary};
 `;
 
@@ -122,20 +122,20 @@ export const RightIcon = styled.TouchableOpacity`
 `;
 
 export const StyledButton = styled.TouchableOpacity`
-  padding: 15px;
+  padding: 5px;
   background-color: ${brand};
   justify-content: center;
   align-items: center;
   border-radius: 45px;
   margin-vertical: 25px;
-  margin-left: 75px;
-  height: 60px;
-  width: 150px;
+  margin-left: 100px;
+  height: 45px;
+  width: 120px;
 `;
 
 export const ButtonText = styled.Text`
   color: ${primary};
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 export const MsgBox = styled.Text`
@@ -181,11 +181,11 @@ export const StyledButtonSmall = styled.TouchableOpacity`
   align-items: center;
   margin-left: 5px;
   border-radius: 45px;
-  height: 25px;
-  width: 100px;
+  height: 30px;
+  width: 70px;
 `;
 
 export const SmallButtonText = styled.Text`
   color: ${primary};
-  font-size: 10px;
+  font-size: 14px;
 `;

@@ -23,58 +23,61 @@ import {
 
 import { Formik } from "formik";
 import { Octicons } from '@expo/vector-icons'
+import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper.js";
 const { darkLight, brand } = Colors;
 
 const Login = () => {
     const [hidePassword, setHidePassword] = useState(true);
     return (
-        <StyledContainer>
-            <StatusBar style="dark" />
-            <InnerContainer>
-                <PageLogo resizeMode="cover" source={require("./../assets/img/img1.png")} />
-                <PageTitle>District Health Authority Rawalpindi</PageTitle>
-                <SubTitle>Account Login</SubTitle>
-                <Formik
-                    initialValues={{ email: '', password: '' }}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
-                >
-                    {({ handleChange, handleBlur, handleSubmit, values }) => (
-                        <StyledFormArea>
-                            <MyTextInput
-                                label="Email Address" icon="mail"
-                                placeholder="address@example.com"
-                                placeholderTextColor={darkLight}
-                                onChangeText={handleChange('email')}
-                                onBlur={handleBlur('email')}
-                                value={values.email}
-                                keyboardType="email-address"
-                            />
-                            <MyTextInput
-                                label="Password" icon="lock"
-                                placeholder="* * * * * * * *"
-                                placeholderTextColor={darkLight}
-                                onChangeText={handleChange('password')}
-                                onBlur={handleBlur('password')}
-                                value={values.password}
-                                secureTextEntry={hidePassword}
-                                isPassword={true}
-                                hidePassword={hidePassword}
-                                setHidePassword={setHidePassword}
-                            />
-                            <MsgBox>...</MsgBox>
-                            <StyledButton onPress={handleSubmit}>
-                                <ButtonText>Login</ButtonText>
-                            </StyledButton>
-                            <Line />
+        <KeyboardAvoidingWrapper>
+            <StyledContainer>
+                <StatusBar style="dark" />
+                <InnerContainer>
+                    <PageLogo resizeMode="cover" source={require("./../assets/img/img1.png")} />
+                    <PageTitle>District Health Authority Rawalpindi</PageTitle>
+                    <SubTitle>Account Login</SubTitle>
+                    <Formik
+                        initialValues={{ email: '', password: '' }}
+                        onSubmit={(values) => {
+                            console.log(values);
+                        }}
+                    >
+                        {({ handleChange, handleBlur, handleSubmit, values }) => (
+                            <StyledFormArea>
+                                <MyTextInput
+                                    label="Email Address" icon="mail"
+                                    placeholder="address@example.com"
+                                    placeholderTextColor={darkLight}
+                                    onChangeText={handleChange('email')}
+                                    onBlur={handleBlur('email')}
+                                    value={values.email}
+                                    keyboardType="email-address"
+                                />
+                                <MyTextInput
+                                    label="Password" icon="lock"
+                                    placeholder="* * * * * * * *"
+                                    placeholderTextColor={darkLight}
+                                    onChangeText={handleChange('password')}
+                                    onBlur={handleBlur('password')}
+                                    value={values.password}
+                                    secureTextEntry={hidePassword}
+                                    isPassword={true}
+                                    hidePassword={hidePassword}
+                                    setHidePassword={setHidePassword}
+                                />
+                                <MsgBox>...</MsgBox>
+                                <StyledButton onPress={handleSubmit}>
+                                    <ButtonText>Login</ButtonText>
+                                </StyledButton>
+                                <Line />
 
-                        </StyledFormArea>
-                    )}
-                </Formik>
-                <SubTitle>Powered by Epidemics Prevention & Control Cell</SubTitle>
-            </InnerContainer>
-        </StyledContainer>
+                            </StyledFormArea>
+                        )}
+                    </Formik>
+                    <SubTitle>Powered by Epidemics Prevention & Control Cell</SubTitle>
+                </InnerContainer>
+            </StyledContainer>
+        </KeyboardAvoidingWrapper>
     )
 }
 

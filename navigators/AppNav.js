@@ -17,7 +17,7 @@ const AppNav = () => {
         <StyledContainer>
             <StatusBar style="dark" />
             <InnerContainer>
-                <PageLogo resizeMode="cover" source={require("./../assets/img/img1.png")} />
+                {/* <PageLogo resizeMode="cover" source={require("./../assets/img/img1.png")} /> */}
                 <PageTitle>District Health Authority Rawalpindi</PageTitle>
                 <SubTitle>Loading</SubTitle>
                 <MsgBox>{userToken}</MsgBox>

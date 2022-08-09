@@ -1,15 +1,26 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 export const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [userToken, setUserToken] = useState(null)
 
-    const login = async () => {
+    const login = (email, password) => {
         setIsLoading(false)
-        setUserToken('jjkljkjgsfaddafkdja')
-        await AsyncStorage.setItem('userToken', "jjkljkjgsfaddafkdja")
+        axios.post('http://auth.sjnotes.tk:5001/api/auth/login', {
+            email,
+            password
+        })
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(error => {
+                console.log(`API Call error ${error}`)
+            })
+        // setUserToken('jjkljkjgsfaddafkdja')
+        // AsyncStorage.setItem('userToken', "jjkljkjgsfaddafkdja")
         setIsLoading(false)
     }
 

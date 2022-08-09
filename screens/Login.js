@@ -34,6 +34,7 @@ const { darkLight, brand } = Colors;
 const Login = ({ navigation }) => {
     const [hidePassword, setHidePassword] = useState(true);
     const { userToken, login } = useContext(AuthContext)
+
     return (
         <KeyboardAvoidingWrapper>
             <StyledContainer>
@@ -47,7 +48,7 @@ const Login = ({ navigation }) => {
                         onSubmit={
                             // login()
                             (values) => {
-                                login()
+                                login(values.email, values.password)
                                 console.log(values);
                                 // navigation.navigate("Welcome")
                             }

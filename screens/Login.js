@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native'
 
@@ -28,10 +28,12 @@ import {
 import { Formik } from "formik";
 import { Octicons } from '@expo/vector-icons'
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper.js";
+import { AuthContext } from "../context/AuthContext.js";
 const { darkLight, brand } = Colors;
 
 const Login = ({ navigation }) => {
     const [hidePassword, setHidePassword] = useState(true);
+    const { userToken, login } = useContext(AuthContext)
     return (
         <KeyboardAvoidingWrapper>
             <StyledContainer>
@@ -42,10 +44,13 @@ const Login = ({ navigation }) => {
                     <SubTitle>Account Login</SubTitle>
                     <Formik
                         initialValues={{ email: '', password: '' }}
-                        onSubmit={(values) => {
-                            console.log(values);
-                            navigation.navigate("Welcome")
-                        }}
+                        onSubmit={
+                            // login()
+                            (values) => {
+                                console.log(values);
+                                // navigation.navigate("Welcome")
+                            }
+                        }
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
                             <StyledFormArea>
@@ -70,18 +75,19 @@ const Login = ({ navigation }) => {
                                     hidePassword={hidePassword}
                                     setHidePassword={setHidePassword}
                                 />
-                                <MsgBox>...</MsgBox>
+                                <MsgBox>{userToken}</MsgBox>
                                 <StyledButton onPress={handleSubmit}>
                                     <ButtonText>Login</ButtonText>
                                 </StyledButton>
                                 <Line />
                                 <ExtraView>
                                     <ExtraText>Don't have an account?</ExtraText>
-                                    <StyledButtonSmall onPress={() => { navigation.navigate('Signup') }}>
+                                    <StyledButtonSmall onPress={() => navigation.navigate('Signup')}>
                                         <SmallButtonText>Signup</SmallButtonText>
                                     </StyledButtonSmall>
                                 </ExtraView>
                             </StyledFormArea>
+
                         )}
                     </Formik>
                     <SubTitle>Powered by Epidemics Prevention & Control Cell</SubTitle>

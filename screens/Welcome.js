@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 import { StatusBar } from 'expo-status-bar';
+import { AuthContext } from "../context/AuthContext.js";
 
 
 import {
@@ -17,6 +18,7 @@ import {
 } from "./../components/styles.js"
 
 const Welcome = ({ navigation }) => {
+    const { logout } = useContext(AuthContext)
     return (
         <>
             <StatusBar style="dark" />
@@ -29,7 +31,9 @@ const Welcome = ({ navigation }) => {
                     <StyledFormArea>
                         <Avatar resizeMode="cover" source={require("./../assets/img/img1.png")} />
                         <Line />
-                        <StyledButton onPress={() => { navigation.navigate("Login") }}>
+                        <StyledButton onPress={() => {
+                            // logout()
+                        }}>
                             <ButtonText>Logout</ButtonText>
                         </StyledButton>
                     </StyledFormArea>

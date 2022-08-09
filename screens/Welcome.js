@@ -32,7 +32,8 @@ const Welcome = ({ navigation }) => {
                         <Avatar resizeMode="cover" source={require("./../assets/img/img1.png")} />
                         <Line />
                         <StyledButton onPress={() => {
-                            // logout()
+                            console.log("Logout working")
+                            logout()
                         }}>
                             <ButtonText>Logout</ButtonText>
                         </StyledButton>

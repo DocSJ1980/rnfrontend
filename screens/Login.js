@@ -47,6 +47,7 @@ const Login = ({ navigation }) => {
                         onSubmit={
                             // login()
                             (values) => {
+                                login()
                                 console.log(values);
                                 // navigation.navigate("Welcome")
                             }

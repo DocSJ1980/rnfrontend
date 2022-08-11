@@ -32,8 +32,11 @@ import { AuthContext } from "../context/AuthContext.js";
 const { darkLight, brand } = Colors;
 
 const Login = ({ navigation }) => {
-    const [hidePassword, setHidePassword] = useState(true);
-    const { userToken, login } = useContext(AuthContext)
+    const [hidePassword, setHidePassword] = useState(true)
+
+    const { login, msg, msgType } = useContext(AuthContext)
+
+
 
     return (
         <KeyboardAvoidingWrapper>
@@ -46,11 +49,9 @@ const Login = ({ navigation }) => {
                     <Formik
                         initialValues={{ email: '', password: '' }}
                         onSubmit={
-                            // login()
                             (values) => {
                                 login(values.email, values.password)
                                 console.log(values);
-                                // navigation.navigate("Welcome")
                             }
                         }
                     >
@@ -77,7 +78,7 @@ const Login = ({ navigation }) => {
                                     hidePassword={hidePassword}
                                     setHidePassword={setHidePassword}
                                 />
-                                <MsgBox>{userToken}</MsgBox>
+                                <MsgBox type={msgType}>{msg}</MsgBox>
                                 <StyledButton onPress={handleSubmit}>
                                     <ButtonText>Login</ButtonText>
                                 </StyledButton>
@@ -89,7 +90,6 @@ const Login = ({ navigation }) => {
                                     </StyledButtonSmall>
                                 </ExtraView>
                             </StyledFormArea>
-
                         )}
                     </Formik>
                     <SubTitle>Powered by Epidemics Prevention & Control Cell</SubTitle>

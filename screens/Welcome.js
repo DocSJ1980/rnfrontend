@@ -14,11 +14,12 @@ import {
     Line,
     WelcomeContainer,
     WelcomeImage,
-    Avatar
+    Avatar,
+    MsgBox
 } from "./../components/styles.js"
 
 const Welcome = ({ navigation }) => {
-    const { logout } = useContext(AuthContext)
+    const { msg, msgType, logout } = useContext(AuthContext)
     return (
         <>
             <StatusBar style="dark" />
@@ -28,6 +29,7 @@ const Welcome = ({ navigation }) => {
                     <PageTitle welcome={true}>Welcome</PageTitle>
                     <SubTitle welcome={true}>Muhammad Abdullah</SubTitle>
                     <SubTitle welcome={true}>0315-1122334</SubTitle>
+                    <MsgBox type={msgType}>{msg}</MsgBox>
                     <StyledFormArea>
                         <Avatar resizeMode="cover" source={require("./../assets/img/img1.png")} />
                         <Line />

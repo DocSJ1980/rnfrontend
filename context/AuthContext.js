@@ -1,55 +1,78 @@
 import React, { createContext, useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setItemAsync, deleteItemAsync, getItemAsync } from "expo-secure-store";
 import axios from "axios";
+
 export const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [userToken, setUserToken] = useState(null)
     const [userInfo, setUserInfo] = useState(null)
+    const [msg, setMsg] = useState(true)
+    const [msgType, setMsgType] = useState(true)
+    const showMsg = () => {
+        setTimeout(() => {
+            setMsg();
+        }, 3000);
+    }
+
     const login = (email, password) => {
         setIsLoading(true)
-        console.log(isLoading)
         axios.post('http://auth.sjnotes.tk:5001/api/auth/login', {
             email,
             password
         })
             .then(async (res) => {
                 try {
-                    setUserInfo(res.data.message)
                     setUserToken(res.data.token)
-                    await AsyncStorage.setItem('userTokenLocal', res.data.token)
-                    await AsyncStorage.setItem('userInfoLocal', JSON.stringify(userInfo))
-                    console.log("Token: ", userToken, "Message: ", userInfo)
+                    setMsg(res.data.message)
+                    setMsgType(res.data.success)
+                    showMsg()
+                    setUserInfo(res.data.userInfo)
+                    await setItemAsync('userTokenLocal', res.data.token)
+                    await setItemAsync('userInfoLocal', JSON.stringify(res.data))
+
                 } catch (error) {
-                    `error hai ${error}`
+                    console.log(`error hai ${error}`)
+                    setMsg("Login Failed")
+                    setMsgType(false)
+                    showMsg()
                 }
+                console.log(userInfo)
+                console.log("Token: ", userToken)
             })
             .catch(e => {
                 console.log(`API Error ${e}`)
+                setMsg("Login Failed")
+                setMsgType(false)
+                showMsg()
             })
         setIsLoading(false)
     }
 
     const logout = () => {
-        console.log("Token: ", userToken, "Message: ", userInfo)
+        console.log("UserInfo: ", userInfo)
         setIsLoading(true)
-        AsyncStorage.removeItem('userTokenLocal')
-        AsyncStorage.removeItem('userInfoLocal')
+        setMsg("Logged out successfully")
+        setMsgType(false)
+        deleteItemAsync('userTokenLocal')
+        deleteItemAsync('userInfoLocal')
         setUserToken(null)
         setUserInfo(null)
         setIsLoading(false)
+        showMsg()
     }
 
     const isLoggedIn = async () => {
         try {
             setIsLoading(true)
-            let userTokenLocal = await AsyncStorage.getItem('userTokenLocal')
-            let userInfoLocal = await AsyncStorage.getItem('userInfoLocal')
+            let userTokenLocal = await getItemAsync('userTokenLocal')
+            let userInfoLocal = await getItemAsync('userInfoLocal')
             if (userTokenLocal) {
                 setUserToken(userTokenLocal)
                 setUserInfo(userInfoLocal)
                 setIsLoading(false)
+                showMsg()
             }
             console.log(userToken, userInfo)
         } catch (error) {
@@ -59,11 +82,12 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         isLoggedIn()
+
     }, [])
 
 
     return (
-        <AuthContext.Provider value={{ login, logout, isLoading, userToken }}>
+        <AuthContext.Provider value={{ login, logout, isLoading, userToken, msg, userInfo, msgType }}>
             {children}
         </AuthContext.Provider>
     )

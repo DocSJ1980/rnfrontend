@@ -6,13 +6,13 @@ const StatusBarHeight = Constants.statusBarHeight;
 
 // colors
 export const Colors = {
-    primary: '#ffffff',
-    secondary: '#E5E7EB',
-    tertiary: '#1F2937',
-    darkLight: '#9CA3AF',
-    brand: '#076f29',
-    green: '#10B981',
-    red: '#EF4444',
+  primary: '#ffffff',
+  secondary: '#E5E7EB',
+  tertiary: '#1F2937',
+  darkLight: '#9CA3AF',
+  brand: '#076f29',
+  green: '#10B981',
+  red: '#EF4444',
 };
 
 const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
@@ -64,8 +64,8 @@ export const PageTitle = styled.Text`
   font-weight: bold;
   color: ${brand};
   ${(props) =>
-        props.welcome &&
-        `
+    props.welcome &&
+    `
     font-size: 35px;
   `}
 `;
@@ -78,8 +78,8 @@ export const SubTitle = styled.Text`
   margin-bottom: 20px;
   margin-vertical: 10px;
   ${(props) =>
-        props.welcome &&
-        `
+    props.welcome &&
+    `
         margin-vertical: 5px;
         margin-bottom: 0px;
     font-weight: normal;
@@ -141,6 +141,9 @@ export const ButtonText = styled.Text`
 export const MsgBox = styled.Text`
   text-align: center;
   font-size: 13px;
+  color: ${(props) =>
+    props.type == true ? brand : red
+  }
 `;
 
 export const Line = styled.View`

@@ -30,6 +30,7 @@ import { Octicons } from '@expo/vector-icons'
 const { darkLight, brand } = Colors;
 
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper.js";
+import { Myselectlist } from "../components/Picker.js";
 
 
 const Signup = ({ navigation }) => {
@@ -109,6 +110,7 @@ const Signup = ({ navigation }) => {
                                     isDate={true}
                                     showDatePickerNew={showDatePickerNew}
                                 />
+                                <Myselectlist />
                                 <MyTextInput
                                     label="Password" icon="lock"
                                     placeholder="* * * * * * * *"
